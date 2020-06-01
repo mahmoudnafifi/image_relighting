@@ -267,7 +267,7 @@ if __name__ == "__main__":
             name, _ = os.path.splitext(base_name)
 
             t_img = Image.open(fn_t)
-            t_img = t_img.resize((d1_temp, d2_temp), 3)
+            t_img = t_img.resize((d2_temp, d1_temp), 3)
             t_img = np.array(t_img) / 255
 
             tensor_t_img = torch.unsqueeze(torch.from_numpy(t_img.transpose(

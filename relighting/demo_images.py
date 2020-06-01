@@ -231,7 +231,7 @@ if __name__ == "__main__":
                         original_in_img.save('temp_i.png')
                         for i in range(6):
                             t_img = Image.open(f'ref/{i+1}.png')
-                            t_img = t_img.resize((d1_temp, d2_temp), 3)
+                            t_img = t_img.resize((d2_temp, d1_temp), 3)
                             t_img = np.array(t_img) / 255
                             if t_img.shape[2] == 4:
                                 t_img = t_img[:, :, 0:3]
@@ -318,7 +318,7 @@ if __name__ == "__main__":
                     name, _ = os.path.splitext(base_name)
 
                     t_img = Image.open(fn_t)
-                    t_img = t_img.resize((d1_temp, d2_temp), 3)
+                    t_img = t_img.resize((d2_temp, d1_temp), 3)
                     t_img = np.array(t_img) / 255
 
                     tensor_t_img = torch.unsqueeze(torch.from_numpy(t_img.transpose(
