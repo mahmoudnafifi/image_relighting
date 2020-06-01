@@ -95,7 +95,6 @@ if __name__ == "__main__":
                 md = np.max([d1, d2])
                 factor = maxSize / md
                 in_img = in_img.resize((int(d1 * factor), int(d2 * factor)), 3)
-                d1, d2 = in_img.size
                 upscaling_pp = 1
             else:
                 upscaling_pp = 0
@@ -104,12 +103,13 @@ if __name__ == "__main__":
                 pp = True
                 remove_zeros_pp = 0
 
-            if in_img.shape[2] == 4:
+            in_img = np.array(in_img) / 255
+            d1, d2, c = in_img.shape
+            if c == 4:
                 in_img = in_img[:, :, 0:3]
 
             pad1 = 16 - d1 % 16
             pad2 = 16 - d2 % 16
-            in_img = np.array(in_img) / 255
             temp = np.zeros((d1 + pad1, d2 + pad2, 3)).astype(np.float32)
             temp[:d1, :d2, :] = in_img
             in_img = temp
@@ -168,7 +168,6 @@ if __name__ == "__main__":
                 else:
                     raise Exception('Relighting Model (one-to-any) not found for ensembling!')
 
-
             imgfiles = []
             valid_images = (".jpg", ".png")
             for fn in os.listdir(input_dir):
@@ -194,10 +193,11 @@ if __name__ == "__main__":
                     remove_zeros_pp = 1
                     color_transfer_pp = 0
 
+                    in_img = np.array(in_img) / 255
+                    d1, d2, c = in_img.shape
                     pad1 = 16 - d1 % 16
                     pad2 = 16 - d2 % 16
-                    in_img = np.array(in_img) / 255
-                    if in_img.shape[2] == 4:
+                    if c == 4:
                         in_img = in_img[:, :, 0:3]
                     temp = np.zeros((d1 + pad1, d2 + pad2, 3)).astype(np.float32)
                     temp[:d1, :d2, :] = in_img
@@ -290,7 +290,6 @@ if __name__ == "__main__":
                         md = np.max([d1, d2])
                         factor = maxSize / md
                         in_img = in_img.resize((int(d1 * factor), int(d2 * factor)), 3)
-                        d1, d2 = in_img.size
                         upscaling_pp = 1
                     else:
                         upscaling_pp = 0
@@ -299,10 +298,10 @@ if __name__ == "__main__":
 
                     remove_zeros_pp = 1
                     color_transfer_pp = 0
-
+                    in_img = np.array(in_img) / 255
+                    d1, d2, c = in_img.shape
                     pad1 = 16 - d1 % 16
                     pad2 = 16 - d2 % 16
-                    in_img = np.array(in_img) / 255
                     if in_img.shape[2] == 4:
                         in_img = in_img[:, :, 0:3]
                     temp = np.zeros((d1 + pad1, d2 + pad2, 3)).astype(np.float32)

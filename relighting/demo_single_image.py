@@ -14,11 +14,11 @@ def get_args():
     parser.add_argument('--model_dir', '-m', default='./models',
                         help="Specify the directory of the trained model.", dest='model_dir')
     parser.add_argument('--input', '-i', help='Input image filename', dest='input',
-                        default='../../validation_t3/input/Pair008.png')
+                        default='input.jpg')
     parser.add_argument('--input_g', '-ig', help='Input ground truth image filename', dest='input_g',
-                        default=None)#default='../../train_t3/Image000_2500_N.png')
+                        default=None)
     parser.add_argument('--input_t', '-it', help='Input target image filename', dest='input_t',
-                        default='../../validation_t3/guide/Pair007.png')
+                        default='target.jpg')
     parser.add_argument('--output_dir', '-o', default='./results',
                         help='Directory to save the output images', dest='out_dir')
     parser.add_argument('--show', '-v', action='store_true', default=True,
@@ -92,7 +92,6 @@ if __name__ == "__main__":
             md = np.max([d1, d2])
             factor = maxSize / md
             in_img = in_img.resize((int(d1 * factor), int(d2 * factor)), 3)
-            d1, d2 = in_img.size
             upscaling_pp = 1
         else:
             upscaling_pp = 0
@@ -102,7 +101,8 @@ if __name__ == "__main__":
             remove_zeros_pp = 0
 
         in_img = np.array(in_img) / 255
-        if in_img.shape[2] == 4:
+        d1, d2, c = in_img.size
+        if c == 4:
             in_img = in_img[:, :, 0:3]
 
         pad1 = 16 - d1 % 16
@@ -163,7 +163,6 @@ if __name__ == "__main__":
                 md = np.max([d1, d2])
                 factor = maxSize / md
                 in_img = in_img.resize((int(d1 * factor), int(d2 * factor)), 3)
-                d1, d2 = in_img.size
                 upscaling_pp = 1
             else:
                 upscaling_pp = 0
@@ -173,10 +172,11 @@ if __name__ == "__main__":
             remove_zeros_pp = 1
             color_transfer_pp = 0
 
+            in_img = np.array(in_img) / 255
+            d1, d2, c = in_img.shape
             pad1 = 16 - d1 % 16
             pad2 = 16 - d2 % 16
-            in_img = np.array(in_img) / 255
-            if in_img.shape[2] == 4:
+            if c == 4:
                 in_img = in_img[:, :, 0:3]
             temp = np.zeros((d1 + pad1, d2 + pad2, 3)).astype(np.float32)
             temp[:d1, :d2, :] = in_img
@@ -240,7 +240,6 @@ if __name__ == "__main__":
                 md = np.max([d1, d2])
                 factor = maxSize / md
                 in_img = in_img.resize((int(d1 * factor), int(d2 * factor)), 3)
-                d1, d2 = in_img.size
                 upscaling_pp = 1
             else:
                 upscaling_pp = 0
@@ -249,11 +248,11 @@ if __name__ == "__main__":
 
             remove_zeros_pp = 1
             color_transfer_pp = 0
-
+            in_img = np.array(in_img) / 255
+            d1, d2, c = in_img.shape
             pad1 = 16 - d1 % 16
             pad2 = 16 - d2 % 16
-            in_img = np.array(in_img) / 255
-            if in_img.shape[2] == 4:
+            if c == 4:
                 in_img = in_img[:, :, 0:3]
             temp = np.zeros((d1 + pad1, d2 + pad2, 3)).astype(np.float32)
             temp[:d1, :d2, :] = in_img
