@@ -14,11 +14,11 @@ def get_args():
     parser.add_argument('--model_dir', '-m', default='./models',
                         help="Specify the directory of the trained model.", dest='model_dir')
     parser.add_argument('--input', '-i', help='Input image filename', dest='input',
-                        default='../../validation_t1/input/Image343.png')
+                        default='../../validation_t3/input/Pair008.png')
     parser.add_argument('--input_g', '-ig', help='Input ground truth image filename', dest='input_g',
                         default=None)#default='../../train_t3/Image000_2500_N.png')
     parser.add_argument('--input_t', '-it', help='Input target image filename', dest='input_t',
-                        default=None)#default='../../train_t3/Image095_2500_N.png')
+                        default='../../validation_t3/guide/Pair007.png')
     parser.add_argument('--output_dir', '-o', default='./results',
                         help='Directory to save the output images', dest='out_dir')
     parser.add_argument('--show', '-v', action='store_true', default=True,
@@ -93,6 +93,14 @@ if __name__ == "__main__":
             factor = maxSize / md
             in_img = in_img.resize((int(d1 * factor), int(d2 * factor)), 3)
             d1, d2 = in_img.size
+            upscaling_pp = 1
+        else:
+            upscaling_pp = 0
+
+        if upscaling_pp is 1:
+            pp = True
+            remove_zeros_pp = 0
+
         in_img = np.array(in_img) / 255
         if in_img.shape[2] == 4:
             in_img = in_img[:, :, 0:3]
@@ -108,12 +116,24 @@ if __name__ == "__main__":
             (2, 0, 1))).to(device=device, dtype=torch.float32), dim=0)
 
         name, _ = os.path.splitext(os.path.split(fn)[1])
-
-        result = net(tensor_in_img)
+        with torch.no_grad():
+            result = net(tensor_in_img)
         result = torch.squeeze(result).cpu().detach().numpy().transpose((1, 2, 0))
         result = result[:d1, :d2, :]
         result = utils.to_image(result)
         in_img = utils.to_image(in_img)
+
+        original_in_img = Image.open(fn)
+        original_in_img.save('temp_i.png')
+
+        if pp is True:
+            if os.path.exists('result.png'):
+                os.remove('result.png')
+            os.system(f'post_processing.exe "temp_i.png" "{upscaling_pp}" "temp_r.png" "{remove_zeros_pp}"')
+            print('Post processing....')
+            while not os.path.exists('result.png'):
+                continue
+            result = Image.open('result.png')
         if tosave:
             result.save(os.path.join(out_dir, name + '.png'))
 
@@ -144,6 +164,15 @@ if __name__ == "__main__":
                 factor = maxSize / md
                 in_img = in_img.resize((int(d1 * factor), int(d2 * factor)), 3)
                 d1, d2 = in_img.size
+                upscaling_pp = 1
+            else:
+                upscaling_pp = 0
+
+            pp = True
+
+            remove_zeros_pp = 1
+            color_transfer_pp = 0
+
             pad1 = 16 - d1 % 16
             pad2 = 16 - d2 % 16
             in_img = np.array(in_img) / 255
@@ -156,12 +185,24 @@ if __name__ == "__main__":
                 (2, 0, 1))).to(device=device, dtype=torch.float32), dim=0)
 
             name, _ = os.path.splitext(os.path.split(fn)[1])
-
-            result = net(tensor_in_img)
+            with torch.no_grad():
+                result = net(tensor_in_img)
             result = torch.squeeze(result).cpu().detach().numpy().transpose((1, 2, 0))
             result = result[:d1, :d2, :]
             result = utils.to_image(result)
             in_img = utils.to_image(in_img)
+            result.save('temp_r.png')
+
+            original_in_img = Image.open(fn)
+            original_in_img.save('temp_i.png')
+            if pp is True:
+                if os.path.exists('result.png'):
+                    os.remove('result.png')
+                os.system(f'post_processing.exe "temp_i.png" "{upscaling_pp}" "temp_r.png" "{remove_zeros_pp}"')
+                print('Post processing....')
+                while not os.path.exists('result.png'):
+                    continue
+                result = Image.open('result.png')
 
             if fn_g is not None:
                 gt_img = Image.open(fn_g)
@@ -200,6 +241,15 @@ if __name__ == "__main__":
                 factor = maxSize / md
                 in_img = in_img.resize((int(d1 * factor), int(d2 * factor)), 3)
                 d1, d2 = in_img.size
+                upscaling_pp = 1
+            else:
+                upscaling_pp = 0
+
+            pp = True
+
+            remove_zeros_pp = 1
+            color_transfer_pp = 0
+
             pad1 = 16 - d1 % 16
             pad2 = 16 - d2 % 16
             in_img = np.array(in_img) / 255
@@ -225,12 +275,25 @@ if __name__ == "__main__":
                 (2, 0, 1))).to(device=device, dtype=torch.float32), dim=0)
 
             name, _ = os.path.splitext(os.path.split(fn)[1])
-
-            result = net(tensor_in_img, t=tensor_t_img)
+            with torch.no_grad():
+                result = net(tensor_in_img, t=tensor_t_img)
             result = torch.squeeze(result).cpu().detach().numpy().transpose((1, 2, 0))
             result = result[:d1, :d2, :]
             result = utils.to_image(result)
             in_img = utils.to_image(in_img)
+
+            result.save('temp_r.png')
+            original_in_img = Image.open(fn)
+            original_in_img.save('temp_i.png')
+            if pp is True:
+                if os.path.exists('result.png'):
+                    os.remove('result.png')
+                os.system(f'post_processing.exe "temp_i.png" "{upscaling_pp}"'
+                          f' "temp_r.png" "{remove_zeros_pp}"')
+                print('Post processing....')
+                while not os.path.exists('result.png'):
+                    continue
+                result = Image.open('result.png')
 
             if fn_g is not None:
                 gt_img = Image.open(fn_g)

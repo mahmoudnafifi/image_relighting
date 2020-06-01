@@ -61,7 +61,7 @@ def train_net(net, device, epochs=60, batch_size=32, lr=0.0001, val_percent=0.1,
         gt_dir_img = os.path.join(dataset_dir, 'train_t3/')
         tr_dir_img = os.path.join(dataset_dir, 'train_t3/')
 
-        train_relighting_one_to_any(net, device, epochs=int(epochs * 2), batch_size=int(batch_size / 4), lr=lr,
+        train_relighting_one_to_any(net, device, epochs=epochs, batch_size=int(batch_size / 4), lr=lr,
                                     val_percent=val_percent,
                                     lrdf=lrdf, lrdp=lrdp, chkpointperiod=chkpointperiod, patchsz=patchsz,
                                     validationFrequency=validationFrequency, in_dir_img=in_dir_img,
@@ -90,7 +90,7 @@ def train_net(net, device, epochs=60, batch_size=32, lr=0.0001, val_percent=0.1,
         gt_dir_img = os.path.join(dataset_dir, 'train_t3/')
         tr_dir_img = os.path.join(dataset_dir, 'train_t3/')
 
-        train_relighting_one_to_any(net, device, epochs=int(epochs * 2), batch_size=int(batch_size / 4), lr=lr,
+        train_relighting_one_to_any(net, device, epochs=epochs, batch_size=int(batch_size / 4), lr=lr,
                                     val_percent=val_percent,
                                     lrdf=lrdf, lrdp=lrdp, chkpointperiod=chkpointperiod, patchsz=patchsz,
                                     validationFrequency=validationFrequency, in_dir_img=in_dir_img,
@@ -103,7 +103,7 @@ def train_net(net, device, epochs=60, batch_size=32, lr=0.0001, val_percent=0.1,
         gt_dir_img = os.path.join(dataset_dir, 'train_t3/')
         tr_dir_img = os.path.join(dataset_dir, 'train_t3/')
 
-        train_relighting_one_to_any(net, device, epochs=int(epochs * 2), batch_size=int(batch_size / 4), lr=lr,
+        train_relighting_one_to_any(net, device, epochs=epochs, batch_size=int(batch_size / 4), lr=lr,
                                     val_percent=val_percent, lrdf=lrdf, lrdp=lrdp, chkpointperiod=chkpointperiod,
                                     patchsz=patchsz, validationFrequency=validationFrequency, in_dir_img=in_dir_img,
                                     gt_dir_img=gt_dir_img, tr_dir_img=tr_dir_img, save_cp=save_cp)
