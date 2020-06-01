@@ -14,11 +14,11 @@ def get_args():
     parser.add_argument('--model_dir', '-m', default='./models',
                         help="Specify the directory of the trained model.", dest='model_dir')
     parser.add_argument('--input', '-i', help='Input image filename', dest='input',
-                        default='input.jpg')
+                        default='input.png')
     parser.add_argument('--input_g', '-ig', help='Input ground truth image filename', dest='input_g',
                         default=None)
     parser.add_argument('--input_t', '-it', help='Input target image filename', dest='input_t',
-                        default='target.jpg')
+                        default='target.png')
     parser.add_argument('--output_dir', '-o', default='./results',
                         help='Directory to save the output images', dest='out_dir')
     parser.add_argument('--show', '-v', action='store_true', default=True,
@@ -27,7 +27,7 @@ def get_args():
     parser.add_argument('--save', '-s', action='store_true',
                         help="Save the output images",
                         default=True, dest='save')
-    parser.add_argument('--device', '-d', default='cpu',
+    parser.add_argument('--device', '-d', default='cuda',
                         help="Device: cuda or cpu.", dest='device')
     parser.add_argument('-tsk', '--task', dest='task', default='relighting',
                         help='Task: normalization or relighting')
