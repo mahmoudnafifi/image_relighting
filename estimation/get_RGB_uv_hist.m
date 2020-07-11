@@ -1,11 +1,30 @@
+%
+% Copyright (c) 2018-present, Mahmoud Afifi
+% York University, Canada
+% mafifi@eecs.yorku.ca | m.3afifi@gmail.com
+%
+% This source code is licensed under the license found in the
+% LICENSE file in the root directory of this source tree.
+% All rights reserved.
+%
+% Please cite the following work if this program is used:
+% -------------------------------------------------------
+% Mahmoud Afifi, Brian Price, Scott Cohen, and Michael S. Brown,
+% "When color constancy goes wrong: Correcting improperly white-balanced
+% images", CVPR 2019.
+%
+% Mahmoud Afifi and Michael S. Brown. Sensor Independent Illumination 
+% Estimation for DNN Models. In BMVC, 2019
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+
+
 function hist = get_RGB_uv_hist(I,h)
 if nargin == 1
     h  =60;
 end
-I = im2double(I);
-
-
-
+I = imresize(im2double(I),[256,256]);
 eps= 6.4/h;
 I=(reshape(I,[],3));
 A=[-3.2:eps:3.19];
