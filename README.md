@@ -35,3 +35,16 @@ normalization net.
 Augment input images with WB augmenter to generate 10 augmented images for 
 each original image. We assume the input images (after augmentation) are located in `train_t1`. For `train_t1`, the augmented data and new 
 ground truth should be located in `train_t1/input_aug` and `train_t1/target_aug`. We have used the modified `demo_WB_color_augmentation.m` (given) to process input  and target images for track 1.
+
+
+## Citation:
+
+Please cite the following paper if you use our training/testing code:
+
+1. ...
+
+If you use the [RGB-uv histogram](https://github.com/mahmoudnafifi/image_relighting/blob/master/estimation/get_RGB_uv_hist.m), please cite the following papers:
+
+1. Mahmoud Afifi, Brian Price, Scott Cohen, and Michael S. Brown. When color constancy goes wrong: Correcting improperly white-balanced images. In CVPR, 2019.
+
+2. Mahmoud Afifi and Michael S. Brown. Sensor-independent illumination estimation for DNN models. In BMVC, 2019.
