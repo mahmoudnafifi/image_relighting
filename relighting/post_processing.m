@@ -34,7 +34,7 @@ end
 output_ds = im2double(imread(output_ds_file));
 
 if upsampling == 1
-%    addpath('./bgu-master/src/matlab');
+    addpath('./bgu-master/src/matlab');
 
     edge_fs = rgb2luminance(input_fs); % Used to slice at full resolution.
     output_ds = imresize(output_ds,[128, 128]);
@@ -51,13 +51,6 @@ else
 end
 
 if remove_black_pixels == 1
-    %output_2 = output .* zero_mask;
-    %mask = imdilate(zero_mask == 0, se);
-    %mask = imgaussfilt(double(mask), 4);
-    %for c = 1 : 3
-    %    output(:,:,c) = output_2(:,:,c) .* (1-mask) + ...
-    %        mask .* output(:,:,c);
-    %end
     for c = 1 : 3
         output(:,:,c) = output(:,:,c) .* zero_mask;
     end

@@ -35,14 +35,14 @@ class RelightingNet(nn.Module):
 
         x1 = self.inc(x)
 
-        y1 = self.inc(y)
+        y1 = self.inc_norm(y)
         y2 = self.down1_norm(y1)
         y3 = self.down2_norm(y2)
         y4 = self.down3_norm(y3)
         y5 = self.down4_norm(y4)
 
         if z is not None:
-            z1 = self.inc(z)
+            z1 = self.inc_t(z)
             z2 = self.down1_t(z1)
             z3 = self.down2_t(z2)
             z4 = self.down3_t(z3)

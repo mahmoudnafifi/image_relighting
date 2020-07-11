@@ -40,10 +40,21 @@ each original image. We assume the input images (after augmentation) are located
 ground truth should be located in `train_t1/input_aug` and `train_t1/target_aug`. We have used the modified `demo_WB_color_augmentation.m` (given) to process input  and target images for track 1.
 
 
+## Image Relighting (task 1 & task 3)
+This code requires PyTorch. To begin, please make sure that you prepared the normalization training data and image augmentation as described above. 
+
+
+Run `relighting/train.py` to train the normalization net, the one-to-one image relighting net, and the one-to-any image relighting net. Please adjust the training image directories accordingly. 
+
+To test trained models, run `relighting/train.py`. You can select the target task using the 'task' argument. If you selected `relighting` for the `task` and the `input_dir_t` was `None`, the code will run the one-to-one mapping. 
+
+
 ## Illuminant estimation (task 2)
 This code requires Matlab 2019b or higher. To begin, please make sure that your data was augmented as described above. 
 
-Run `estimation/training_resnet_hist.m` to train the color temperature estimation network and `estimation/training_resnet.m` to train the angle estimation network. To test the trained models, run `testing_code.m`. 
+Run `estimation/training_resnet_hist.m` to train the color temperature estimation network and `estimation/training_resnet.m` to train the angle estimation network. Please adjust the training image directory accordingly. 
+
+To test the trained models, run `testing_code.m`. 
 
 ## Citation:
 

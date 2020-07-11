@@ -10,9 +10,10 @@ import random
 
 
 class DataLoading(Dataset):
-    def __init__(self, imgs_dir, target_dir=None, gt_dir=None):
-        self.patch_size = 256
+    def __init__(self, imgs_dir, target_dir=None, patch_size=256, gt_dir=None, resizing=True):
+        self.patch_size = patch_size
         self.imgs_dir = imgs_dir
+        self.resizing = resizing
         self.imgfiles = [join(imgs_dir, file) for file in listdir(imgs_dir)
                          if not file.startswith('.')]
         self.target_dir = target_dir
@@ -27,15 +28,6 @@ class DataLoading(Dataset):
         if self.gt_dir is not None:
             if self.target_dir is not None:
                 self.gtimgfiles = self.targetimgfiles
-                # for i in range(len(self.imgfiles)):
-                #     self.gtimgfiles[i] = self.targetimgfiles[i].replace(self.target_dir, self.gt_dir)
-                #     _, tail = path.split(self.gtimgfiles[i])
-                #     parts = tail.split('_')
-                #     tg_lighting = parts[1] + '_' + parts[2]
-                #     _, tail = path.split(self.imgfiles[i])
-                #     parts = tail.split('_')
-                #     base = parts[0]
-                #     self.gtimgfiles[i] = join(self.gt_dir, base + '_' + tg_lighting)
             else:
                 self.gtimgfiles = [join(gt_dir, file) for file in listdir(gt_dir)
                                    if not file.startswith('.')]
@@ -70,26 +62,40 @@ class DataLoading(Dataset):
 
         img_file = self.imgfiles[i]
         in_img = Image.open(img_file)
-        # get image size
-        w, h = in_img.size
-        if w > 512 or h > 512:
-            in_img = in_img.resize((512, 512), Image.ANTIALIAS)
-        w, h = in_img.size
-        # get flipping option
-        aug_op = np.random.randint(4)
-        # get random patch coord
-        patch_x = np.random.randint(0, high=w - self.patch_size)
-        patch_y = np.random.randint(0, high=h - self.patch_size)
-        in_img_patch = self.preprocess(in_img, self.patch_size, aug_op, patch_coords=(patch_x, patch_y))
+        if self.resizing is True:
+            # get image size
+            in_img = in_img.resize((self.patch_size, self.patch_size), Image.ANTIALIAS)
+            # get flipping option
+            aug_op = np.random.randint(4)
+            in_img_patch = self.preprocess(in_img, self.patch_size, aug_op)
+        else:
+            # get image size
+            w, h = in_img.size
+            if w > 512 or h > 512:
+                in_img = in_img.resize((512, 512), Image.ANTIALIAS)
+            w, h = in_img.size
+            # get flipping option
+            aug_op = np.random.randint(4)
+            # get random patch coord
+            patch_x = np.random.randint(0, high=w - self.patch_size)
+            patch_y = np.random.randint(0, high=h - self.patch_size)
+            in_img_patch = self.preprocess(in_img, self.patch_size, aug_op, patch_coords=(patch_x, patch_y))
 
         if self.target_dir is not None:
             j = random.randint(0, len(self.targetimgfiles)-1)
             target_imgfile = self.targetimgfiles[j]
             target_img = Image.open(target_imgfile)
-            w_, h_ = target_img.size
-            if w_ > 512 or h_ > 512:
-                target_img = target_img.resize((512, 512), Image.ANTIALIAS)
-            target_img_patch = self.preprocess(target_img, self.patch_size, aug_op, patch_coords=(patch_x, patch_y))
+            if self.resizing is True:
+                # get image size
+                target_img = target_img.resize((self.patch_size, self.patch_size), Image.ANTIALIAS)
+                # get flipping option
+                aug_op = np.random.randint(4)
+                target_img_patch = self.preprocess(target_img, self.patch_size, aug_op)
+            else:
+                w_, h_ = target_img.size
+                if w_ > 512 or h_ > 512:
+                    target_img = target_img.resize((512, 512), Image.ANTIALIAS)
+                target_img_patch = self.preprocess(target_img, self.patch_size, aug_op, patch_coords=(patch_x, patch_y))
             if self.gt_dir is None:
                 return {'input': torch.from_numpy(in_img_patch), 'target': torch.from_numpy(target_img_patch)}
             else:
@@ -102,20 +108,28 @@ class DataLoading(Dataset):
                 gt_imgfile = join(self.gt_dir, base + '_' + tg_lighting)
                 #print(f'Input: {img_file}, target: {target_imgfile}, gt: {gt_imgfile}\n')
                 gt_img = Image.open(gt_imgfile)
-                w_, h_ = gt_img.size
-                if w_ > 512 or h_ > 512:
-                    gt_img = gt_img.resize((512, 512), Image.ANTIALIAS)
-                gt_img_patch = self.preprocess(gt_img, self.patch_size, aug_op, patch_coords=(patch_x, patch_y))
+                if self.resizing is True:
+                    gt_img = gt_img.resize((self.patch_size, self.patch_size), Image.ANTIALIAS)
+                    gt_img_patch = self.preprocess(gt_img, self.patch_size, aug_op)
+                else:
+                    w_, h_ = gt_img.size
+                    if w_ > 512 or h_ > 512:
+                        gt_img = gt_img.resize((512, 512), Image.ANTIALIAS)
+                    gt_img_patch = self.preprocess(gt_img, self.patch_size, aug_op, patch_coords=(patch_x, patch_y))
                 return {'input': torch.from_numpy(in_img_patch), 'target': torch.from_numpy(target_img_patch),
                         'gt': torch.from_numpy(gt_img_patch)}
 
         elif self.gt_dir is not None:
             gt_imgfile = self.gtimgfiles[i]
             gt_img = Image.open(gt_imgfile)
-            w_, h_ = gt_img.size
-            if w_ > 512 or h_ > 512:
-                gt_img = gt_img.resize((512, 512), Image.ANTIALIAS)
-            gt_img_patch = self.preprocess(gt_img, self.patch_size, aug_op, patch_coords=(patch_x, patch_y))
+            if self.resizing is True:
+                gt_img = gt_img.resize((self.patch_size, self.patch_size), Image.ANTIALIAS)
+                gt_img_patch = self.preprocess(gt_img, self.patch_size, aug_op)
+            else:
+                w_, h_ = gt_img.size
+                if w_ > 512 or h_ > 512:
+                    gt_img = gt_img.resize((512, 512), Image.ANTIALIAS)
+                gt_img_patch = self.preprocess(gt_img, self.patch_size, aug_op, patch_coords=(patch_x, patch_y))
             return {'input': torch.from_numpy(in_img_patch), 'gt': torch.from_numpy(gt_img_patch)}
         else:
             return {'input': torch.from_numpy(in_img_patch)}

@@ -25,16 +25,16 @@ except ImportError:
 
 
 def train_net(net, device, epochs=60, batch_size=32, lr=0.0001, val_percent=0.1, lrdf=0.5, lrdp=25, chkpointperiod=1,
-              patchsz=256, validationFrequency=4, dataset_dir='', task='', save_cp=True):
+              patchsz=256, validationFrequency=4, dataset_dir='', task='', resizing=True,save_cp=True):
     if task == 'normalization':
         logging.info(f'Current task is {task}.')
         in_dir_img = os.path.join(dataset_dir, 'input_aug/')
         gt_dir_img = os.path.join(dataset_dir, 'gt_images_aug/')
-        norm_net = train_normalization(net, device, epochs=epochs, batch_size=int(batch_size / 2), lr=lr,
+        norm_net = train_normalization(net, device, epochs=epochs, batch_size=batch_size, lr=lr,
                                        val_percent=val_percent, lrdf=lrdf, lrdp=lrdp, chkpointperiod=chkpointperiod,
                                        patchsz=patchsz,
                                        validationFrequency=validationFrequency, in_dir_img=in_dir_img,
-                                       gt_dir_img=gt_dir_img, save_cp=save_cp)
+                                       gt_dir_img=gt_dir_img, resizing=resizing, save_cp=save_cp)
 
         net = Relighting.Relighting(task='relighting_one_to_one', device=device)
         net.to(device=device)
@@ -45,10 +45,10 @@ def train_net(net, device, epochs=60, batch_size=32, lr=0.0001, val_percent=0.1,
         in_dir_img = os.path.join(dataset_dir, 'train_t1/input_aug/')
         gt_dir_img = os.path.join(dataset_dir, 'train_t1/target_aug/')
 
-        train_relighting_one_to_one(net, device, epochs=epochs, batch_size=int(batch_size / 2), lr=lr,
+        train_relighting_one_to_one(net, device, epochs=epochs, batch_size=batch_size, lr=lr,
                                     val_percent=val_percent, lrdf=lrdf, lrdp=lrdp, chkpointperiod=chkpointperiod,
                                     patchsz=patchsz, validationFrequency=validationFrequency,
-                                    in_dir_img=in_dir_img, gt_dir_img=gt_dir_img, save_cp=save_cp)
+                                    in_dir_img=in_dir_img, gt_dir_img=gt_dir_img, resizing=resizing, save_cp=save_cp)
 
         net = Relighting.Relighting(task='relighting_one_to_any', device=device)
         net.to(device=device)
@@ -61,22 +61,22 @@ def train_net(net, device, epochs=60, batch_size=32, lr=0.0001, val_percent=0.1,
         gt_dir_img = os.path.join(dataset_dir, 'train_t3/')
         tr_dir_img = os.path.join(dataset_dir, 'train_t3/')
 
-        train_relighting_one_to_any(net, device, epochs=epochs, batch_size=int(batch_size / 4), lr=lr,
+        train_relighting_one_to_any(net, device, epochs=epochs, batch_size=int(batch_size / 2), lr=lr,
                                     val_percent=val_percent,
                                     lrdf=lrdf, lrdp=lrdp, chkpointperiod=chkpointperiod, patchsz=patchsz,
                                     validationFrequency=validationFrequency, in_dir_img=in_dir_img,
                                     gt_dir_img=gt_dir_img,
-                                    tr_dir_img=tr_dir_img, save_cp=save_cp)
+                                    tr_dir_img=tr_dir_img, resizing=resizing, save_cp=save_cp)
 
     elif task == 'relighting_one_to_one':
         logging.info(f'Current task is {task}.')
         in_dir_img = os.path.join(dataset_dir, 'train_t1/input_aug/')
         gt_dir_img = os.path.join(dataset_dir, 'train_t1/target_aug/')
 
-        train_relighting_one_to_one(net, device, epochs=epochs, batch_size=int(batch_size / 2), lr=lr,
+        train_relighting_one_to_one(net, device, epochs=epochs, batch_size=batch_size, lr=lr,
                                     val_percent=val_percent, lrdf=lrdf, lrdp=lrdp, chkpointperiod=chkpointperiod,
                                     patchsz=patchsz, validationFrequency=validationFrequency,
-                                    in_dir_img=in_dir_img, gt_dir_img=gt_dir_img, save_cp=save_cp)
+                                    in_dir_img=in_dir_img, gt_dir_img=gt_dir_img, resizing=resizing, save_cp=save_cp)
 
         norm_net = net.norm_net
         net = Relighting.Relighting(task='relighting_one_to_any', device=device)
@@ -90,12 +90,12 @@ def train_net(net, device, epochs=60, batch_size=32, lr=0.0001, val_percent=0.1,
         gt_dir_img = os.path.join(dataset_dir, 'train_t3/')
         tr_dir_img = os.path.join(dataset_dir, 'train_t3/')
 
-        train_relighting_one_to_any(net, device, epochs=epochs, batch_size=int(batch_size / 4), lr=lr,
+        train_relighting_one_to_any(net, device, epochs=epochs, batch_size=int(batch_size / 2), lr=lr,
                                     val_percent=val_percent,
                                     lrdf=lrdf, lrdp=lrdp, chkpointperiod=chkpointperiod, patchsz=patchsz,
                                     validationFrequency=validationFrequency, in_dir_img=in_dir_img,
                                     gt_dir_img=gt_dir_img,
-                                    tr_dir_img=tr_dir_img, save_cp=save_cp)
+                                    tr_dir_img=tr_dir_img, resizing=resizing, save_cp=save_cp)
 
     elif task == 'relighting_one_to_any':
         logging.info(f'Current task is {task}.')
@@ -103,16 +103,16 @@ def train_net(net, device, epochs=60, batch_size=32, lr=0.0001, val_percent=0.1,
         gt_dir_img = os.path.join(dataset_dir, 'train_t3/')
         tr_dir_img = os.path.join(dataset_dir, 'train_t3/')
 
-        train_relighting_one_to_any(net, device, epochs=epochs, batch_size=int(batch_size / 4), lr=lr,
+        train_relighting_one_to_any(net, device, epochs=epochs, batch_size=int(batch_size / 2), lr=lr,
                                     val_percent=val_percent, lrdf=lrdf, lrdp=lrdp, chkpointperiod=chkpointperiod,
                                     patchsz=patchsz, validationFrequency=validationFrequency, in_dir_img=in_dir_img,
-                                    gt_dir_img=gt_dir_img, tr_dir_img=tr_dir_img, save_cp=save_cp)
+                                    gt_dir_img=gt_dir_img, tr_dir_img=tr_dir_img, resizing=resizing, save_cp=save_cp)
 
 
 def train_normalization(net, device, epochs, batch_size, lr, val_percent, lrdf, lrdp, chkpointperiod, patchsz,
-                        validationFrequency, in_dir_img, gt_dir_img, save_cp):
+                        validationFrequency, in_dir_img, gt_dir_img, resizing, save_cp):
     dir_checkpoint = 'checkpoints_normalization/'
-    dataset = DataLoading(in_dir_img, gt_dir=gt_dir_img)
+    dataset = DataLoading(in_dir_img, gt_dir=gt_dir_img, patch_size=patchsz, resizing=resizing)
     n_val = int(len(dataset) * val_percent)
     n_train = len(dataset) - n_val
     train, val = random_split(dataset, [n_train, n_val])
@@ -205,9 +205,9 @@ def train_normalization(net, device, epochs, batch_size, lr, val_percent, lrdf, 
 
 
 def train_relighting_one_to_one(net, device, epochs, batch_size, lr, val_percent, lrdf, lrdp, chkpointperiod, patchsz,
-                     validationFrequency, in_dir_img, gt_dir_img, save_cp):
+                     validationFrequency, in_dir_img, gt_dir_img, resizing, save_cp):
     dir_checkpoint = 'checkpoints_relighting/'
-    dataset = DataLoading(in_dir_img, gt_dir=gt_dir_img)
+    dataset = DataLoading(in_dir_img, gt_dir=gt_dir_img, patch_size=patchsz, resizing=resizing)
     n_val = int(len(dataset) * val_percent)
     n_train = len(dataset) - n_val
     train, val = random_split(dataset, [n_train, n_val])
@@ -299,9 +299,9 @@ def train_relighting_one_to_one(net, device, epochs, batch_size, lr, val_percent
 
 
 def train_relighting_one_to_any(net, device, epochs, batch_size, lr, val_percent, lrdf, lrdp, chkpointperiod, patchsz,
-                     validationFrequency, in_dir_img, gt_dir_img, tr_dir_img, save_cp):
+                     validationFrequency, in_dir_img, gt_dir_img, tr_dir_img, resizing,  save_cp):
     dir_checkpoint = 'checkpoints_relighting/'
-    dataset = DataLoading(in_dir_img, gt_dir=gt_dir_img, target_dir=tr_dir_img)
+    dataset = DataLoading(in_dir_img, gt_dir=gt_dir_img, patch_size=patchsz, target_dir=tr_dir_img, resizing=resizing)
     n_val = int(len(dataset) * val_percent)
     n_train = len(dataset) - n_val
     train, val = random_split(dataset, [n_train, n_val])
@@ -504,7 +504,7 @@ def vald_net_relighting(net, loader, device, task):
 
 def get_args():
     parser = argparse.ArgumentParser(description='Train deep WB editing network.')
-    parser.add_argument('-e', '--epochs', metavar='E', type=int, default=60,
+    parser.add_argument('-e', '--epochs', metavar='E', type=int, default=150,
                         help='Number of epochs', dest='epochs')
     parser.add_argument('-b', '--batch-size', metavar='B', type=int, nargs='?', default=8,
                         help='Batch size', dest='batchsize')
@@ -524,10 +524,12 @@ def get_args():
                         help='Models directory')
     parser.add_argument('-ldf', '--learning-rate-drop-factor', dest='lrdf', type=float, default=0.5,
                         help='Learning rate drop factor')
-    parser.add_argument('-ldp', '--learning-rate-drop-period', dest='lrdp', type=int, default=25,
+    parser.add_argument('-ldp', '--learning-rate-drop-period', dest='lrdp', type=int, default=50,
                         help='Learning rate drop period')
     parser.add_argument('-trd', '--training_dir', dest='trdir', default='../',
                         help='Training dataset directory')
+    parser.add_argument('-rsz', '--resizing', dest='resizing', default=True,
+                        help='Resizing or use patches')
 
     return parser.parse_args()
 
@@ -605,7 +607,8 @@ if __name__ == '__main__':
                   val_percent=args.val / 100,
                   validationFrequency=args.val_frq,
                   patchsz=args.patchsz,
-                  task=curr_task
+                  task=curr_task,
+                  resizing=args.resizing
                   )
     except KeyboardInterrupt:
         torch.save(net.state_dict(), 'bkupCheckPoint.pth')
