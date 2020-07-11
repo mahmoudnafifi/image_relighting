@@ -41,7 +41,10 @@ ground truth should be located in `train_t1/input_aug` and `train_t1/target_aug`
 
 
 ## Image Relighting (task 1 & task 3)
-This code requires PyTorch. To begin, please make sure that you prepared the normalization training data and image augmentation as described above. 
+
+This code requires PyTorch. We process downscaled images followed by a guided upsampling and post-processing steps. The code for the post-processing steps is given in `relighting/post_processing.m`. It depends on [Bilateral Guided Upsampling](https://github.com/google/bgu). If you use Windows operating system, we built an exe program for the upsampling and post-processing steps. However, if this does not work, you need to rebuild the `post_processing.exe` program by downloading the [Bilateral Guided Upsampling](https://github.com/google/bgu) and build the `relighting/post_processing.m` code using Matlab. 
+
+To begin, please make sure that you prepared the normalization training data and image augmentation as described above. 
 
 
 Run `relighting/train.py` to train the normalization net, the one-to-one image relighting net, and the one-to-any image relighting net. Please adjust the training image directories accordingly. 
