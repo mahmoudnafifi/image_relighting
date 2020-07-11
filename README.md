@@ -34,4 +34,4 @@ normalization net.
 
 Augment input images with WB augmenter to generate 10 augmented images for 
 each original image. We assume the input images (after augmentation) are located in `train_t1`. For `train_t1`, the augmented data and new 
-ground truth should be located in `train_t1/input_aug` and `train_t1/target_aug`. We use the modified `demo_WB_color_augmentation.m` (given) to process input  and target images for track 1.
+ground truth should be located in `train_t1/input_aug` and `train_t1/target_aug`. We have used the modified `demo_WB_color_augmentation.m` (given) to process input  and target images for track 1.
