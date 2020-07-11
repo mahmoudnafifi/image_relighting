@@ -7,9 +7,9 @@ We used training images of track 2 to train the noramlization net. Let assume th
 1. Download WB correction and WB augmenter from the following links:
 
 
-* | WB correction: https://github.com/mahmoudnafifi/WB_sRGB
+   *  WB correction: https://github.com/mahmoudnafifi/WB_sRGB
 
-* | WB augmenter: https://github.com/mahmoudnafifi/WB_color_augmenter
+   *  WB augmenter: https://github.com/mahmoudnafifi/WB_color_augmenter
 
 
 2. Apply WB correction to images in training directory of track 2 -- do not 
