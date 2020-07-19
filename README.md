@@ -1,7 +1,7 @@
 # AIM 2020 Relighting Challenge
 This is the source code of our team (YorkU team) for the three tracks of [AIM 2020 relighting challenge](https://competitions.codalab.org/competitions/24671).
 
-As we explained in the challenge report, our solution is based on a normalization network (for task 1 & 3). Also, we augmented the training data for task 1 and 2. Here, we explain the details of the data used to train our normalizataion network and also we explain how we augment the data using the [WB augmenter](https://github.com/mahmoudnafifi/WB_color_augmenter). 
+As we explained in the challenge report, our solution is based on a normalization network (for task 1 & 3). We explain the details of the data used to train our normalizataion network and also we explain how we augment the training data using the [WB augmenter](https://github.com/mahmoudnafifi/WB_color_augmenter). 
 
 ### Normalization Data:
 
@@ -63,7 +63,7 @@ To test the trained models, run `testing_code.m`.
 
 Please cite the following paper if you use our training/testing code:
 
-1. ...
+1. TBA
 
 If you use the [RGB-uv histogram](https://github.com/mahmoudnafifi/image_relighting/blob/master/estimation/get_RGB_uv_hist.m), please cite the following papers:
 
