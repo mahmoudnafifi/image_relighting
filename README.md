@@ -1,9 +1,12 @@
 # AIM 2020 Relighting Challenge
 
-
-![teaser2](https://user-images.githubusercontent.com/37669469/87887746-dcfd9c00-c9f5-11ea-83a1-c57b4b0e11f3.gif)
-
 This is the source code of our team (YorkU team) for the three tracks of [AIM 2020 relighting challenge](https://competitions.codalab.org/competitions/24671).
+
+
+<p align="center">
+  <img width = 50% src="https://user-images.githubusercontent.com/37669469/87887746-dcfd9c00-c9f5-11ea-83a1-c57b4b0e11f3.gif">
+</p>
+
 
 As we explained in the challenge report, our solution is based on a normalization network (for task 1 & 3). We explain the details of the data used to train our normalizataion network and also we explain how we augment the training data using the [WB augmenter](https://github.com/mahmoudnafifi/WB_color_augmenter). 
 
