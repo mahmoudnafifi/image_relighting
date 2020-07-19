@@ -1,3 +1,6 @@
+__author__ = "Mahmoud Afifi"
+__credits__ = ["Mahmoud Afifi"]
+
 import argparse
 import logging
 import os

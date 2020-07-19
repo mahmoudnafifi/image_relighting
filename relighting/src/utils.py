@@ -1,3 +1,6 @@
+__author__ = "Mahmoud Afifi"
+__credits__ = ["Mahmoud Afifi"]
+
 import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt

@@ -1,3 +1,6 @@
+__author__ = "Mahmoud Afifi"
+__credits__ = ["Mahmoud Afifi"]
+
 import torch.nn as nn
 from src import unet_model
 from src import relighting_model

@@ -1,3 +1,6 @@
+%Author: Mahmoud Afifi
+
+
 function output = post_processing(input_fs_file, upsampling, output_ds_file, remove_black_pixels, w_color_transfer, target_file)
 
 if nargin == 3

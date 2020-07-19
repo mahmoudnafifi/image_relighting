@@ -1,3 +1,5 @@
+%Author: Mahmoud Afifi
+
 dir_in = 'gt';
 dir_out = 'gt_images';
 sz = [512,512,3];

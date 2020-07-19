@@ -1,3 +1,5 @@
+%Author: Mahmoud Afifi
+
 imgs_dir = fullfile('..','..','track2_test');
 
 images = dir(fullfile(imgs_dir,'*.png'));

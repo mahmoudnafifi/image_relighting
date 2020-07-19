@@ -1,3 +1,6 @@
+__author__ = "Mahmoud Afifi"
+__credits__ = ["Mahmoud Afifi"]
+
 from os.path import join
 from os import listdir
 from os import path

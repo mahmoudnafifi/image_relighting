@@ -1,4 +1,5 @@
-""" Full assembly of the parts to form the complete network """
+__author__ = "Mahmoud Afifi"
+__credits__ = ["Mahmoud Afifi"]
 
 from .unet_parts import *
 

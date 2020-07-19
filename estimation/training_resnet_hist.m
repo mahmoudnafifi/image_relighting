@@ -1,3 +1,5 @@
+%Author: Mahmoud Afifi
+
 clear all
 clc
 training_imgs_dir = fullfile('..','train_t2');
