@@ -66,7 +66,11 @@ Run `estimation/training_resnet_hist.m` to train the color temperature estimatio
 
 To test the trained models, run `testing_code.m`. 
 
-## Citation:
+## Trained models
+Trained models will be available soon.
+
+
+## Citation
 
 Please cite the following paper if you use our training/testing code:
 
