@@ -4,7 +4,7 @@ This is YorkU team's source code for the three tracks of [AIM 2020 relighting ch
 
 
 <p align="center">
-  <img width = 50% src="https://user-images.githubusercontent.com/37669469/87887746-dcfd9c00-c9f5-11ea-83a1-c57b4b0e11f3.gif">
+  <img width = 30% src="https://user-images.githubusercontent.com/37669469/87887746-dcfd9c00-c9f5-11ea-83a1-c57b4b0e11f3.gif">
 </p>
 
 
@@ -67,7 +67,7 @@ Run `estimation/training_resnet_hist.m` to train the color temperature estimatio
 To test the trained models, run `testing_code.m`. 
 
 ## Trained models
-Trained models will be available soon.
+The trained models will be available soon.
 
 
 ## Citation
