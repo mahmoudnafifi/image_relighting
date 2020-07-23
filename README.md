@@ -1,6 +1,6 @@
 # AIM 2020 Relighting Challenge
 
-This is the source code of our team (YorkU team) for the three tracks of [AIM 2020 relighting challenge](https://competitions.codalab.org/competitions/24671).
+This is YorkU team's source code for the three tracks of [AIM 2020 relighting challenge](https://competitions.codalab.org/competitions/24671).
 
 
 <p align="center">
