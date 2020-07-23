@@ -72,11 +72,11 @@ Trained models will be available soon.
 
 ## Citation
 
-Please cite the following paper if you use our training/testing code:
+Please cite the following paper if you used our method:
 
 1. TBA
 
-If you use the [RGB-uv histogram](https://github.com/mahmoudnafifi/image_relighting/blob/master/estimation/get_RGB_uv_hist.m), please cite the following papers:
+If you used the [RGB-uv histogram](https://github.com/mahmoudnafifi/image_relighting/blob/master/estimation/get_RGB_uv_hist.m), please cite the following papers:
 
 1. Mahmoud Afifi, Brian Price, Scott Cohen, and Michael S. Brown. When color constancy goes wrong: Correcting improperly white-balanced images. In CVPR, 2019.
 
