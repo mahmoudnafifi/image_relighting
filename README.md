@@ -81,3 +81,7 @@ If you used the [RGB-uv histogram](https://github.com/mahmoudnafifi/image_religh
 1. Mahmoud Afifi, Brian Price, Scott Cohen, and Michael S. Brown. When color constancy goes wrong: Correcting improperly white-balanced images. In CVPR, 2019.
 
 2. Mahmoud Afifi and Michael S. Brown. Sensor-independent illumination estimation for DNN models. In BMVC, 2019.
+
+If you used the [WB augmenter](https://github.com/mahmoudnafifi/WB_color_augmenter), please cite the following paper:
+
+2. Mahmoud Afifi and Michael S. Brown. What Else Can Fool Deep Learning? Addressing Color Constancy Errors on Deep Neural Network Performance. In ICCV, 2019.
