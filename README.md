@@ -8,7 +8,7 @@ This is YorkU team's source code for the three tracks of [AIM 2020 relighting ch
 </p>
 
 
-As we explained in the challenge report, our solution is based on a normalization network (for task 1 & 3). We explain the details of the data used to train our normalizataion network and also we explain how we augment the training data using the [WB augmenter](https://github.com/mahmoudnafifi/WB_color_augmenter). 
+As we explained in the challenge report, our solution is based on a normalization network (for track 1 & 3). We'll explain the details of the data used to train our normalizataion network and also how we augment the training data using the [WB augmenter](https://github.com/mahmoudnafifi/WB_color_augmenter). 
 
 ### Normalization Data:
 
