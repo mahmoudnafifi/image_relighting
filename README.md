@@ -84,4 +84,4 @@ If you used the [RGB-uv histogram](https://github.com/mahmoudnafifi/image_religh
 
 If you used the [WB augmenter](https://github.com/mahmoudnafifi/WB_color_augmenter), please cite the following paper:
 
-2. Mahmoud Afifi and Michael S. Brown. What Else Can Fool Deep Learning? Addressing Color Constancy Errors on Deep Neural Network Performance. In ICCV, 2019.
+1. Mahmoud Afifi and Michael S. Brown. What Else Can Fool Deep Learning? Addressing Color Constancy Errors on Deep Neural Network Performance. In ICCV, 2019.
