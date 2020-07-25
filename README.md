@@ -1,6 +1,6 @@
 # AIM 2020 Relighting Challenge
 
-This is YorkU team's source code for the three tracks of [AIM 2020 relighting challenge](https://competitions.codalab.org/competitions/24671).
+This is YorkU team's source code for the three tracks of [AIM 2020 relighting challenge](https://data.vision.ee.ethz.ch/cvl/aim20/).
 
 
 <p align="center">
@@ -67,14 +67,14 @@ Run `estimation/training_resnet_hist.m` to train the color temperature estimatio
 To test the trained models, run `testing_code.m`. 
 
 ## Trained models
-The trained models will be available soon.
+Currently, we are not going to released our trained models, but they may be available soon.
 
 
 ## Citation
 
 Please cite the following paper if you used our method:
 
-1. TBA
+1. Majed El Helou, et al., AIM 2020: Scene Relighting and Illumination Estimation. In ECCV workshops, 2020.
 
 If you used the [RGB-uv histogram](https://github.com/mahmoudnafifi/image_relighting/blob/master/estimation/get_RGB_uv_hist.m), please cite the following papers:
 
