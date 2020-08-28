@@ -76,7 +76,7 @@ Currently, we are not going to release our trained models, but they may be avail
 
 Please cite the following paper if you used our method:
 
-1. Majed El Helou, et al., AIM 2020: Scene Relighting and Illumination Estimation. In ECCV workshops, 2020.
+1. Majed El Helou, et al., AIM 2020: Scene Relighting and Illumination Estimation Challenge. In ECCV workshops, 2020.
 
 If you used the [RGB-uv histogram](https://github.com/mahmoudnafifi/image_relighting/blob/master/estimation/get_RGB_uv_hist.m), please cite the following papers:
 
